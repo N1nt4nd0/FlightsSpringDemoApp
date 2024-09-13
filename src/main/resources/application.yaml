@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: FlightsSpring
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    url: ${FLIGHTS_SPRING_POSTGRE_URL} # Environment variable
+    username: ${FLIGHTS_SPRING_POSTGRE_USERNAME} # Environment variable
+    password: ${FLIGHTS_SPRING_POSTGRE_PASSWORD} # Environment variable
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force-response: true
+      charset: UTF-8
+
+api:
+  name: Flights API
+  version: 0.0.2
+  path: /flights/api/v1
+
+security:
+  jwt-secret: ${FLIGHTS_SPRING_JWT_SECRET} # Environment variable
+  jwt-expiration-time-ms: 3600000
+
+custom-config:
+  log-mappings: true
+  log-aspects:
+    enabled: true
+    log-services:
+      calls: false
+      exceptions: true
+    log-controllers:
+      calls: false
+      exceptions: false
+
+spring-doc:
+  swagger-ui:
+    enabled: true
+    display-request-duration: true
