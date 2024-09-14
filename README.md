@@ -1,9 +1,9 @@
 # Spring WEB пет-проект
 Демонстрационная реализация REST сервиса авиаперелетов для персонала аэропортов
 
-База данных используемая в проекте: https://postgrespro.ru/education/demodb
+[База данных используемая в проекте](https://postgrespro.ru/education/demodb)
 
-Документация на SwaggerHub: https://app.swaggerhub.com/apis-docs/FEODORKEKOVICH/flights-spring-demo/0.0.2
+[Документация на SwaggerHub](https://app.swaggerhub.com/apis-docs/FEODORKEKOVICH/flights-spring-demo/0.0.2)
 
 ## Реализованные сервисы:
 ### 1. Airports API (/flights/api/v1/airports) - работа с данными аэропортов (для авторизованных пользователей)
