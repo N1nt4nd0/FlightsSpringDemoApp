@@ -27,7 +27,8 @@ public interface FlightsRepository extends JpaRepository<Flight, Integer> {
             SELECT f FROM Flight f
             JOIN TicketFlights tf
             ON f.id = tf.flightId
-            WHERE tf.ticketNumber = :ticketNumber""")
+            WHERE tf.ticketNumber = :ticketNumber
+            """)
     List<Flight> getByTicketNumber(String ticketNumber);
 
 }
