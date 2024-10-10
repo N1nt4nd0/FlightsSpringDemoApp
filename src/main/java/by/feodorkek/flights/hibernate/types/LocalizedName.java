@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Custom type for Hibernate which contents info about localized objects naming.
+ * Used in cities and airports namings
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

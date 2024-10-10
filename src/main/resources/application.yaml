@@ -15,7 +15,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: validate # Checks if the database schema matches the models, but does not make any changes
 
 server:
   port: 8080
@@ -33,16 +33,21 @@ security:
   jwt-secret: ${FLIGHTS_SPRING_JWT_SECRET} # Environment variable
   jwt-expiration-time-ms: 3600000
 
-custom-config:
-  log-mappings: true
-  log-aspects:
-    enabled: true
+custom-config: # Some custom configs
+  root-user: # Root user realization
+    allow-root: false # Allow root account
+    username: ${FLIGHTS_SPRING_ROOT_USERNAME} # Environment variable
+    password: ${FLIGHTS_SPRING_ROOT_PASSWORD} # Environment variable
+  log-mappings: true # Logging endpoint controllers mappings in console during application starting
+  log-aspects: # Aspect logging configs
+    enabled: true # Enable aspect logging in controllers and services methods
+    print-exception-stacktrace: true
     log-services:
-      calls: false
-      exceptions: true
+      calls: false # Log services methods calls
+      exceptions: true # Log exceptions in services methods
     log-controllers:
-      calls: false
-      exceptions: false
+      calls: false # Log controllers methods calls
+      exceptions: false # Log exceptions in controllers methods
 
 spring-doc:
   swagger-ui:

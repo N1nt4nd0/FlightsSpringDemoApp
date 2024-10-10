@@ -13,12 +13,12 @@ import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "ticket_flights", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "ticket_flights", schema = "bookings")
 public class TicketFlights {
 
     @Id

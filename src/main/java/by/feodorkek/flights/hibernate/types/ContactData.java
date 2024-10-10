@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * Custom type for Hibernate which contents info about person contact.
+ * Used in tickets booking
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,9 +23,9 @@ public class ContactData implements Serializable {
     }
 
     @JsonProperty("phone")
-    public String phone;
+    private String phone;
 
     @JsonProperty("email")
-    public String email;
+    private String email;
 
 }

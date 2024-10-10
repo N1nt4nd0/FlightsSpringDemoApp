@@ -28,24 +28,27 @@ class FlightsUserServiceTests {
 
     @Test
     public void testCreateNewFlightsUserWithEmptyRoles() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            userService.createUser(new FlightsUserDto("TestUser", "123", ArrayUtils.EMPTY_STRING_ARRAY));
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                userService.createUser(new FlightsUserDto("TestUser", "123", ArrayUtils.EMPTY_STRING_ARRAY))
+        );
     }
 
     @Test
     public void testCreateNewFlightsUserAlreadyExist() {
-        Mockito.when(userRepository.findById("TestUser")).thenThrow(new EntityExistsException("User already exist"));
-        Assertions.assertThrows(EntityExistsException.class, () -> {
-            userService.createUser(new FlightsUserDto("TestUser", "123", new String[]{"USER"}));
-        });
+        Mockito.when(userRepository.findByUsernameIgnoreCase("TestUser")).thenThrow(
+                new EntityExistsException("User already exist")
+        );
+        Assertions.assertThrows(EntityExistsException.class, () ->
+                userService.createUser(new FlightsUserDto("TestUser", "123", new String[]{"USER"}))
+        );
     }
 
     @Test
     public void testGetAllUsersWithPageableUse() {
         FlightsUser flightsUser = FlightsUser.builder().username("TestUser").build();
         PageRequest pageRequest = PageRequest.ofSize(Integer.MAX_VALUE);
-        Mockito.when(userRepository.findAll(pageRequest)).thenReturn(new PageImpl<FlightsUser>(List.of(flightsUser)));
+        Mockito.when(userRepository.findAll(pageRequest))
+                .thenReturn(new PageImpl<>(List.of(flightsUser)));
         Page<FlightsUser> usersPage = userService.getAllUsers(pageRequest);
         Assertions.assertEquals(1, usersPage.getTotalElements());
         Assertions.assertEquals(flightsUser, usersPage.iterator().next());

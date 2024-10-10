@@ -6,11 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Schema(description = "Activity user schema")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Activity user schema")
 public class ActiveFlightsUserDto {
 
     @Schema(description = "Username", example = "User")

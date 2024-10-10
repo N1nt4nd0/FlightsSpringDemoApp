@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+/**
+ * Implementation of {@link UserType} for custom types like {@link ContactDataUserType} used in Hibernate
+ *
+ * @param <T> Custom user type {@code Class}
+ */
 public abstract class UserTypeAbstract<T extends Serializable> implements UserType<T> {
 
     public static final int TYPE = Types.OTHER;
@@ -30,7 +35,8 @@ public abstract class UserTypeAbstract<T extends Serializable> implements UserTy
     }
 
     @Override
-    public T nullSafeGet(ResultSet rs, int position, SharedSessionContractImplementor session, Object owner) throws SQLException {
+    public T nullSafeGet(ResultSet rs, int position, SharedSessionContractImplementor session,
+                         Object owner) throws SQLException {
         Object value = rs.getObject(position);
         try {
             return value != null ? safeGetObject(value) : null;
@@ -55,7 +61,8 @@ public abstract class UserTypeAbstract<T extends Serializable> implements UserTy
     }
 
     @Override
-    public void nullSafeSet(PreparedStatement st, T value, int index, SharedSessionContractImplementor session) throws SQLException {
+    public void nullSafeSet(PreparedStatement st, T value, int index,
+                            SharedSessionContractImplementor session) throws SQLException {
         if (value == null) {
             st.setNull(index, TYPE);
         } else {

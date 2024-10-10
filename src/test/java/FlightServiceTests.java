@@ -25,9 +25,9 @@ public class FlightServiceTests {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.minusDays(1);
         FlightScheduleDto scheduleDto = FlightScheduleDto.builder().startDate(startDate).endDate(endDate).build();
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            flightsService.getSchedule(scheduleDto, PageRequest.ofSize(1));
-        });
+        Assertions.assertThrows(IllegalArgumentException.class, () ->
+                flightsService.getSchedule(scheduleDto, PageRequest.ofSize(1))
+        );
     }
 
 }

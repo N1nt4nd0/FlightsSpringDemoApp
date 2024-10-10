@@ -14,12 +14,12 @@ import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+@Entity
+@Table(name = "bookings", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "bookings", schema = "bookings")
 public class Booking {
 
     @Id

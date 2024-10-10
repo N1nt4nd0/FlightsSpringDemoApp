@@ -14,12 +14,12 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
 import org.hibernate.type.SqlTypes;
 
+@Entity
+@Table(name = "tickets", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tickets", schema = "bookings")
 public class Ticket {
 
     @Id

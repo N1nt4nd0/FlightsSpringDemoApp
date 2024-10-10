@@ -14,13 +14,42 @@ import java.util.List;
 @Repository
 public interface AirportRepository extends JpaRepository<Airport, String>, PagingAndSortingRepository<Airport, String> {
 
-    @Query("SELECT a.cityName FROM Airport a")
+    @Query("""
+            SELECT a.cityName
+            FROM Airport a
+            """)
     Page<LocalizedName> getAllCities(Pageable pageable);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM bookings.airports_data where city ->> 'ru' = :cityRu")
+    /**
+     * Default in non-normalized database airports localized namings
+     * stored in jsonb format with "ru" and "en" keys.
+     * That's why search realized from specified native query
+     *
+     * @param cityRu city name in russian
+     * @return airports list with naming matches
+     */
+    @Query(value = """
+            SELECT *
+            FROM bookings.airports_data
+            where city ->> 'ru' = :cityRu
+            """,
+            nativeQuery = true)
     List<Airport> getByCityRu(String cityRu);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM bookings.airports_data where city ->> 'en' = :cityEn")
+    /**
+     * Default in non-normalized database airports localized namings
+     * stored in jsonb format with "ru" and "en" keys.
+     * That's why search realized from specified native query
+     *
+     * @param cityEn city name in english
+     * @return airports list with naming matches
+     */
+    @Query(value = """
+            SELECT *
+            FROM bookings.airports_data
+            where city ->> 'en' = :cityEn
+            """,
+            nativeQuery = true)
     List<Airport> getByCityEn(String cityEn);
 
 }

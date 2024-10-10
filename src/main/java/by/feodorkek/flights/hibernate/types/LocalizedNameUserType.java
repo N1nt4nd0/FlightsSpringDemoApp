@@ -1,5 +1,12 @@
 package by.feodorkek.flights.hibernate.types;
 
+import jakarta.persistence.Entity;
+
+/**
+ * {@link JsonTypeAbstract} realization for {@link LocalizedName}.
+ * Needed for correct Hibernate {@link Entity @Entity} processing
+ * with custom {@link LocalizedName} type
+ */
 public class LocalizedNameUserType extends JsonTypeAbstract<LocalizedName> {
 
     public LocalizedNameUserType() {

@@ -8,17 +8,38 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UuidGenerator;
 
+import java.util.Arrays;
+import java.util.UUID;
+
+@Entity
+@Table(name = "flights_users", schema = "public")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "users", schema = "public")
 public class FlightsUser {
 
+    public enum Roles {
+
+        USER, ADMIN;
+
+        public static String[] allRoles() {
+            return Arrays.stream(values())
+                    .map(String::valueOf)
+                    .toList()
+                    .toArray(new String[0]);
+        }
+
+    }
+
     @Id
-    @Column(name = "username", columnDefinition = "CITEXT")
+    @UuidGenerator
+    @Column(name = "id")
+    private UUID id;
+
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password")

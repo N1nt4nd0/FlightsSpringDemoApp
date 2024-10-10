@@ -16,12 +16,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.type.SqlTypes;
 import org.postgresql.geometric.PGpoint;
 
+@Entity
+@Table(name = "airports_data", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "airports_data", schema = "bookings")
 public class Airport {
 
     @Id

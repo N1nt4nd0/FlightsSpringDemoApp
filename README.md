@@ -1,41 +1,98 @@
-# Spring WEB пет-проект
-Демонстрационная реализация REST сервиса авиаперелетов для персонала аэропортов
+# Spring WEB pet-project
 
-[База данных используемая в проекте](https://postgrespro.ru/education/demodb)
+Demo implementation of an air travel REST service for airport staff
 
-[Документация на SwaggerHub](https://app.swaggerhub.com/apis-docs/FEODORKEKOVICH/flights-spring-demo/0.0.2)
+### Development manual to get started:
 
-## Реализованные сервисы:
-### 1. Airports API (/flights/api/v1/airports) - работа с данными аэропортов (для авторизованных пользователей)
-- /cities - получение всех городов из базы
-- /city - получение аэропортов в конкретном городе
-### 2. Flights API (/flights/api/v1/flights) - работа с данными авиаперелетов (для авторизованных пользователей)
-- /schedule - получение расписания аэропортов
-- /ticket_number - получение перелётов по номеру билета
-- /phone - получение перелётов по номеру телефона пассажира
-- /email - получение перелётов по email пассажира
-### 3. Tickets API (/flights/api/v1/tickets) - работа с данными билетов пассажиров (для авторизованных пользователей)
-- /phone - получение списка билетов по номеру телефона пассажира
-- /email - получение списка билетов по email пассажира
-### 4. Auth API (/flights/api/v1/tickets/auth) - авторизация пользователей (открыто для всех)
-- /login - авторизация в API
-- /refresh_token - обновление JWT токена
-- /check_access - проверка доступности API
-### 5. Admin API (/flights/api/v1/tickets/admin) - сервис администрирования (для пользователей с ролью ADMIN)
-- /users/new - создание нового пользователя
-- /users/delete - удаление пользователя по имени
-- /users/active - установка активности пользователя по имени
-- /users/close_access - закрытие доступа к API для проведения технических работ (кроме открытого Auth API и пользователей с ролью ADMIN)
-- /users/open_access - открытие доступа к API для пользователей
-## Технологии проекта:
-- Spring Framework: Boot, MVC, Data JPA, Security
-- Maven
-- Hibernate
+Work environment settings:
+
+- Java 17
+- PostgreSQL 16.3
+- Maven 3.9.7
+
+Frameworks used in the project:
+
+- Spring Boot 3.3.2
+
+## Project technologies:
+
+- Spring:
+    - Boot
+    - MVC
+    - Data JPA
+    - Security
 - Lombok
-- Mockito
+- Mockito testing
 - Swagger UI
-## Реализованные фичи:
-- Логирование вызовов и ошибок в методах сервисов и контроллеров с помощью аспектов (настраивается в yaml конфигурации)
-- Авторизация пользователей с помощью JWT токена
-- Использование пагинации в запросах
-- Swagger UI с JWT авторизацией и подробной документацией для тестирования API
+
+## Implemented features:
+
+- Logging calls and errors in methods of services and controllers using aspects (configured in yaml configuration)
+- User authorization using JWT token
+- Using pagination in queries
+- Swagger UI with JWT authorization and detailed documentation for API testing
+
+## Content definitions:
+
+### [Database used in project (Version 13.10.2016-big)](https://postgrespro.ru/education/demodb) [(Download zip)](https://edu.postgrespro.ru/demo-big-20161013.zip)
+
+After importing main database in PostgreSQL, use specified requests for creating additional database for simple Spring
+Security users authentications
+
+```roomsql
+-- Creating new user 'pilot' with password 'pilot' for database connections
+CREATE USER pilot WITH PASSWORD 'pilot';
+
+-- Creating extension for uuid auto generator
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Creating flights_users table in public scheme
+CREATE TABLE public.flights_users (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
+    username character varying(255) UNIQUE NOT NULL,
+    password character varying(255) NOT NULL,
+    roles character varying[] NOT NULL,
+    active boolean DEFAULT true NOT NULL
+);
+
+-- Grant privileges to users table for 'pilot' database user 
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.flights_users TO pilot;
+```
+
+## Documentation:
+
+[API documentation (SwaggerHUB)](https://app.swaggerhub.com/apis-docs/FEODORKEKOVICH/flights-spring-demo/0.0.2)
+
+### Realized endpoints:
+
+### 1. Airports API (/flights/api/v1/airports) - working with airport data (for authorized users)
+
+- /cities - getting all cities from the database
+- /city - getting airports in a specific city
+
+### 2. Flights API (/flights/api/v1/flights) - working with air travel data (for authorized users)
+
+- /schedule - getting airport schedules
+- /ticket_number - getting flights by ticket number
+- /phone - getting flights using the passenger's phone number
+- /email - getting flights via passenger email
+
+### 3. Tickets API (/flights/api/v1/tickets) - working with passenger ticket data (for authorized users)
+
+- /phone - getting a list of tickets by passenger phone number
+- /email - getting a list of tickets by passenger email
+
+### 4. Auth API (/flights/api/v1/tickets/auth) - user authorization (permit to all)
+
+- /login - API authorization
+- /refresh_token - JWT token update
+- /check_access - API availability check
+
+### 5. Admin API (/flights/api/v1/tickets/admin) - administration service (for users with the ADMIN role)
+
+- /users/new - creating a new user
+- /users/delete - deleting a user by name
+- /users/active - setting user activity by name
+- /users/close_access - closing access to the API for technical work (except for the open Auth API and users with the
+  ADMIN role)
+- /users/open_access - opening access to the API for users

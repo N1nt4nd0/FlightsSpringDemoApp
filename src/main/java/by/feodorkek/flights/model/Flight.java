@@ -13,25 +13,13 @@ import org.hibernate.type.SqlTypes;
 
 import java.time.OffsetDateTime;
 
+@Entity
+@Table(name = "flights", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "flights", schema = "bookings")
 public class Flight {
-
-    public enum FlightStatus {
-
-        SCHEDULED("Scheduled"), ON_TIME("On Time"), DELAYED("Delayed"), DEPARTED("Departed"), ARRIVED("Arrived"), CANCELLED("Cancelled");
-
-        public final String statusName;
-
-        FlightStatus(String statusName) {
-            this.statusName = statusName;
-        }
-
-    }
 
     @Id
     @Column(name = "flight_id")

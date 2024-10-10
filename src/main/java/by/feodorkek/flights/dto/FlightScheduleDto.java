@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Schema(description = "Flights schedule schema")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Flights schedule schema")
 public class FlightScheduleDto {
 
     @Schema(description = "Departure airport code", example = "VKO")

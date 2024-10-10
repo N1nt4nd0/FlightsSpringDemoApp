@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+@Entity
+@Table(name = "boarding_passes", schema = "bookings")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "boarding_passes", schema = "bookings")
 public class BoardingPass {
 
     @Id

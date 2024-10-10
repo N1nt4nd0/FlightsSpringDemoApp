@@ -13,6 +13,10 @@ import java.util.List;
 @Repository
 public interface FlightsRepository extends JpaRepository<Flight, Integer> {
 
+    /**
+     * This query retrieves flights from a specific departure airport to a
+     * specific arrival airport within a given time range
+     */
     @Query("""
             SELECT f FROM Flight f
             WHERE f.departureAirport = :departureAirportCode
@@ -20,7 +24,9 @@ public interface FlightsRepository extends JpaRepository<Flight, Integer> {
             AND f.scheduledDeparture >= :startDateTime
             AND f.scheduledDeparture < :endDateTime
             """)
-    Page<Flight> getSchedule(String departureAirportCode, String arrivalAirportCode, OffsetDateTime startDateTime, OffsetDateTime endDateTime, Pageable pageable);
+    Page<Flight> getSchedule(String departureAirportCode, String arrivalAirportCode,
+                             OffsetDateTime startDateTime, OffsetDateTime endDateTime,
+                             Pageable pageable);
 
 
     @Query("""
