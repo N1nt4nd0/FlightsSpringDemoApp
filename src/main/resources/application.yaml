@@ -7,9 +7,9 @@ spring:
       enabled: true
       force: true
   datasource:
-    url: ${FLIGHTS_SPRING_POSTGRE_URL} # Environment variable
-    username: ${FLIGHTS_SPRING_POSTGRE_USERNAME} # Environment variable
-    password: ${FLIGHTS_SPRING_POSTGRE_PASSWORD} # Environment variable
+    url: ${FLIGHTS_SPRING_POSTGRES_URL} # Environment variable
+    username: ${FLIGHTS_SPRING_POSTGRES_USERNAME} # Environment variable
+    password: ${FLIGHTS_SPRING_POSTGRES_PASSWORD} # Environment variable
   jpa:
     properties:
       hibernate:
@@ -35,7 +35,7 @@ security:
 
 custom-config: # Some custom configs
   root-user: # Root user realization
-    allow-root: false # Allow root account
+    allow-root: true # Allow root account
     username: ${FLIGHTS_SPRING_ROOT_USERNAME} # Environment variable
     password: ${FLIGHTS_SPRING_ROOT_PASSWORD} # Environment variable
   log-mappings: true # Logging endpoint controllers mappings in console during application starting

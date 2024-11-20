@@ -59,6 +59,16 @@ CREATE TABLE public.flights_users (
 GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.flights_users TO pilot;
 ```
 
+## Before run:
+Set up next environment variables:
+
+`FLIGHTS_SPRING_ROOT_USERNAME` - root access username
+`FLIGHTS_SPRING_ROOT_PASSWORD` - root access user password
+`FLIGHTS_SPRING_JWT_SECRET` - secret key for spring security JWT Token encoding
+`FLIGHTS_SPRING_POSTGRES_URL` - postgres flights database url
+`FLIGHTS_SPRING_POSTGRES_USERNAME` - postgres flights database username
+`FLIGHTS_SPRING_POSTGRES_PASSWORD` - postgres flights database user password
+
 ## Documentation:
 
 [API documentation (SwaggerHUB)](https://app.swaggerhub.com/apis-docs/FEODORKEKOVICH/flights-spring-demo/0.0.2)
