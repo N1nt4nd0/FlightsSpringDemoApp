@@ -11,11 +11,19 @@ spring:
     username: ${FLIGHTS_SPRING_POSTGRES_USERNAME} # Environment variable
     password: ${FLIGHTS_SPRING_POSTGRES_PASSWORD} # Environment variable
   jpa:
+    show-sql: true # Configuring display of SQL queries to the database in the log
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false # Setting up fancy display of SQL queries in the log
     hibernate:
       ddl-auto: validate # Checks if the database schema matches the models, but does not make any changes
+
+logging:
+  level: # Configuring log levels for specified classes
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.transaction: TRACE
+    org.hibernate.transaction: TRACE
 
 server:
   port: 8080
@@ -41,10 +49,10 @@ custom-config: # Some custom configs
   log-mappings: true # Logging endpoint controllers mappings in console during application starting
   log-aspects: # Aspect logging configs
     enabled: true # Enable aspect logging in controllers and services methods
-    print-exception-stacktrace: true
+    print-exception-stacktrace: false
     log-services:
       calls: false # Log services methods calls
-      exceptions: true # Log exceptions in services methods
+      exceptions: false # Log exceptions in services methods
     log-controllers:
       calls: false # Log controllers methods calls
       exceptions: false # Log exceptions in controllers methods
