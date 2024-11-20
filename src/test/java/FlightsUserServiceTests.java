@@ -35,9 +35,8 @@ class FlightsUserServiceTests {
 
     @Test
     public void testCreateNewFlightsUserAlreadyExist() {
-        Mockito.when(userRepository.findByUsernameIgnoreCase("TestUser")).thenThrow(
-                new EntityExistsException("User already exist")
-        );
+        Mockito.when(userRepository.findByUsernameIgnoreCase("TestUser"))
+                .thenThrow(new EntityExistsException("User already exist"));
         Assertions.assertThrows(EntityExistsException.class, () ->
                 userService.createUser(new FlightsUserDto("TestUser", "123", new String[]{"USER"}))
         );
