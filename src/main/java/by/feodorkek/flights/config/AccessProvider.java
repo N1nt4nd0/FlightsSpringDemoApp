@@ -37,10 +37,10 @@ public class AccessProvider {
      * @return Access state boolean value
      */
     public boolean checkAccess() {
-        if (!allowAccess) {
-            return isAdmin();
+        if (allowAccess) {
+            return true;
         }
-        return true;
+        return isAdmin();
     }
 
     /**

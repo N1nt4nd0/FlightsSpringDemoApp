@@ -45,7 +45,7 @@ public class MappingsListHandler {
     public void printMappings() {
         if (logMappings) {
             requestMappingHandlerMapping.getHandlerMethods().forEach((key, value) -> {
-                log.info(key + " : " + value);
+                log.info("{} : {}", key, value);
             });
         }
     }
